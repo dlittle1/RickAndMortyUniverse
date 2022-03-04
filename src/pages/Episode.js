@@ -11,6 +11,7 @@ const Episode = () => {
   const [characterIds, setCharacterIds] = useState([])
   const [loading, setLoading] = useState(true)
 
+  // get episode info based on url param
   useEffect(() => {
     axios
       .get(`https://rickandmortyapi.com/api/episode/${params.episodeId}`)
@@ -19,6 +20,7 @@ const Episode = () => {
       .catch((err) => console.error(err))
   }, [])
 
+  // gets a list of characters from api response, then gets id from url
   useEffect(() => {
     if (response) {
       response.characters.forEach((character) => {
@@ -31,6 +33,7 @@ const Episode = () => {
     }
   }, [response])
 
+  // fetches character data based on the id's from above
   useEffect(() => {
     if (response) {
       const url = 'https://rickandmortyapi.com/api/character/' + characterIds
