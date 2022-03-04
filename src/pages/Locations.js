@@ -15,6 +15,8 @@ import { Link } from 'react-router-dom'
 import useInfiteScroll from '../hooks/useInfiniteScroll'
 const Locations = () => {
   const { loading, response, loadingPage, error } = useInfiteScroll('location')
+  if (error) console.error(error)
+
   if (loading) {
     return (
       <Box>

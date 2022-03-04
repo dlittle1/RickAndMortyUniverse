@@ -16,6 +16,7 @@ import useInfiteScroll from '../hooks/useInfiniteScroll'
 
 const Episodes = () => {
   const { loading, response, loadingPage, error } = useInfiteScroll('episode')
+  if (error) console.error(error)
 
   if (loading) {
     return (

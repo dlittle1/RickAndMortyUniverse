@@ -1,20 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import {
-  Box,
-  CircularProgress,
-  Typography,
-  Grid,
-  Card,
-  CardContent,
-  CardMedia,
-  CardActions,
-  Button,
-} from '@mui/material'
-import useAxios from '../hooks/useAxios'
+import { Box, CircularProgress, Typography, Grid } from '@mui/material'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
-import Character from './Character'
 import CharacterCardGridItem from '../components/CharacterCardGridItem'
 
 const Location = () => {

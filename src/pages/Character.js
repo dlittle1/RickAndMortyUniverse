@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import useAxios from '../hooks/useAxios'
 import { useParams } from 'react-router-dom'
 import * as cheerio from 'cheerio'
-import DOMPurify from 'dompurify'
 import sanitizeHtml from 'sanitize-html'
 import axios from 'axios'
 import {
