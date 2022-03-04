@@ -35,6 +35,7 @@ const Character = () => {
 
   useEffect(() => {
     if (character) {
+      // get data from rickandmorty wiki
       let name = character.name
       if (name === 'Abadango Cluster Princess') name = 'Abadongian Princess'
       if (name === 'Abradolf Lincler') name = 'Abrodolph_Lincoler'
@@ -50,6 +51,7 @@ const Character = () => {
         ) //.parse.text['*']
         .catch((err) => console.error(err))
 
+      // get location and origin info
       const locationId = getParams(character.location.url)
       const originId = getParams(character.origin.url)
       axios
@@ -61,15 +63,19 @@ const Character = () => {
     }
   }, [character])
 
+  // returns the id from the url
   function getParams(url) {
     const locationOfParam = url.lastIndexOf('/')
     return url.slice(locationOfParam + 1)
   }
 
+  // parse wiki data, then clean it
   useEffect(() => {
     if (wikiInfo) {
       const $ = cheerio.load(wikiInfo)
+      // finds the first p element
       const extractedData = $.html('p:first-of-type:not(.caption) ')
+      // removes all tags except for p element
       const cleanExtractedData = sanitizeHtml(extractedData, {
         allowedTags: ['p'],
       })
