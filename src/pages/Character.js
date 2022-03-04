@@ -161,11 +161,21 @@ const Character = () => {
                     dangerouslySetInnerHTML={{ __html: cleanedWikiInfo }}
                   ></Typography>
                   <Typography color='rickGreen.main'>
-                    {cleanedWikiInfo !== '<p>Info Missing</p>' &&
-                      `More info found at rickandmorty.fandom.com/wiki/${character.name.replaceAll(
-                        ' ',
-                        '_'
-                      )}`}
+                    {cleanedWikiInfo !== '<p>Info Missing</p>' && (
+                      <>
+                        <a
+                          target={'_blank'}
+                          style={{ textDecoration: 'none', color: 'inherit' }}
+                          href={`https://rickandmorty.fandom.com/wiki/${character.name.replaceAll(
+                            ' ',
+                            '_'
+                          )}`}
+                        >
+                          More info found at rickandmorty.fandom.com/wiki/
+                          {character.name.replaceAll(' ', '_')}
+                        </a>
+                      </>
+                    )}
                   </Typography>
                 </Box>
               </Grid>
