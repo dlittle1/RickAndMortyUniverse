@@ -12,20 +12,52 @@ function useInfiteScroll(urlName) {
   const getMoreResultsController = new AbortController()
   const getInitialResultsController = new AbortController()
   const getPageInfoController = new AbortController()
-  const debouncedLoadMoreEpisodes = useCallback(
-    debounce(() => setPageNumber((prevState) => prevState + 1), 500),
-    []
-  )
+
   // infite scroll
+  useEffect(() => {
+    axios
+      .get(`https://rickandmortyapi.com/api/${urlName}?page=${pageNumber}`, {
+        signal: getInitialResultsController.signal,
+      })
+      .then((res) =>
+        setResponse((prevData) => [...prevData, ...res.data.results])
+      )
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false))
+
+    // get max number of pages for data set
+    axios
+      .get(`https://rickandmortyapi.com/api/${urlName}`, {
+        signal: getPageInfoController.signal,
+      })
+      .then((res) => setPageInfo(res.data))
+      .catch((err) => setError(err))
+
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      getInitialResultsController.abort()
+      getPageInfoController.abort()
+    }
+  }, [])
+
+  // load another page if user scrolls to bottom of screen
   const handleScroll = (e) => {
     if (
       window.innerHeight + e.target.documentElement.scrollTop >
       e.target.documentElement.scrollHeight - 400
     ) {
-      debouncedLoadMoreEpisodes()
+      debouncedLoadAnotherPage()
     }
   }
 
+  // debounce tells the page to stop accepting user feedback for set amount of time
+  const debouncedLoadAnotherPage = useCallback(
+    debounce(() => setPageNumber((prevState) => prevState + 1), 500),
+    []
+  )
+
+  // load another page if max number of pages hasn't been hit
   useEffect(() => {
     if (pageNumber > 1 && pageNumber <= pageInfo.info.pages) {
       setLoadingPage(true)
@@ -43,31 +75,6 @@ function useInfiteScroll(urlName) {
       getMoreResultsController.abort()
     }
   }, [pageNumber])
-
-  useEffect(() => {
-    axios
-      .get(`https://rickandmortyapi.com/api/${urlName}?page=${pageNumber}`, {
-        signal: getInitialResultsController.signal,
-      })
-      .then((res) =>
-        setResponse((prevData) => [...prevData, ...res.data.results])
-      )
-      .catch((err) => setError(err))
-      .finally(() => setLoading(false))
-    axios
-      .get(`https://rickandmortyapi.com/api/${urlName}`, {
-        signal: getPageInfoController.signal,
-      })
-      .then((res) => setPageInfo(res.data))
-      .catch((err) => setError(err))
-
-    window.addEventListener('scroll', handleScroll)
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      getInitialResultsController.abort()
-      getPageInfoController.abort()
-    }
-  }, [])
 
   return { response, loading, loadingPage, error }
 }
