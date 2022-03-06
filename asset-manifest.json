@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/RickAndMortyUniverse/static/js/main.ca8ebb0f.js",
+    "main.js": "/RickAndMortyUniverse/static/js/main.333a51b9.js",
     "static/media/rickAndMortyHomeReduced.jpg": "/RickAndMortyUniverse/static/media/rickAndMortyHomeReduced.ccad5cf341de176286b2.jpg",
     "index.html": "/RickAndMortyUniverse/index.html",
     "static/media/index.cjs": "/RickAndMortyUniverse/static/media/index.cd351d7c31d0d3fccf96.cjs",
-    "main.ca8ebb0f.js.map": "/RickAndMortyUniverse/static/js/main.ca8ebb0f.js.map"
+    "main.333a51b9.js.map": "/RickAndMortyUniverse/static/js/main.333a51b9.js.map"
   },
   "entrypoints": [
-    "static/js/main.ca8ebb0f.js"
+    "static/js/main.333a51b9.js"
   ]
 }
