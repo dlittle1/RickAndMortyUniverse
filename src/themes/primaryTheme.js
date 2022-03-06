@@ -57,4 +57,14 @@ export default createTheme({
       color: 'white',
     },
   },
+  components: {
+    MuiListItemButton: {
+      root: {
+        '&$selected': {
+          color: '#5FBB7D',
+          backgroundColor: '#F0F3F3',
+        },
+      },
+    },
+  },
 })
