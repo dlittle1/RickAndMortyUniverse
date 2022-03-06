@@ -6,13 +6,13 @@ import Location from './pages/Location'
 import Episodes from './pages/Episodes'
 import LocationUnknown from './pages/LocationUnknown'
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import Character from './pages/Character'
 import Episode from './pages/Episode'
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter basename='/'>
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
@@ -24,7 +24,7 @@ function App() {
         <Route path='/episodes' element={<Episodes />} />
         <Route path='/episodes/:episodeId' element={<Episode />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 

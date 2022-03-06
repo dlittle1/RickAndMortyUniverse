@@ -1,6 +1,7 @@
 import React from 'react'
 import rickAndMorty from '../assets/rickAndMortyHomeReduced.jpg'
 import { Typography, Box, Button } from '@mui/material'
+import { Link } from 'react-router-dom'
 
 const imageStyle = {
   background: `url(${rickAndMorty})`,
@@ -28,7 +29,13 @@ const Home = () => {
       <Box sx={boxStyle}>
         <Typography variant='h2'>Welcome to the Universe of</Typography>
         <Typography variant='h1'>Rick and Morty</Typography>
-        <Button variant='contained' color='success' sx={{ marginTop: '20px' }}>
+        <Button
+          component={Link}
+          to='/characters'
+          variant='contained'
+          color='success'
+          sx={{ marginTop: '20px' }}
+        >
           <Typography variant='h6'>Explore!</Typography>
         </Button>
       </Box>
